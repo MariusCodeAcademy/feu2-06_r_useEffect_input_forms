@@ -2,21 +2,20 @@ import { useState } from 'react';
 
 const initTodos = [
   { id: 1, value: 'Buy Eggs', done: false, date: '' },
-  { id: 2, value: 'Go to Shopping', done: true, date: '' },
+  { id: 2, value: 'Go to Shopping', done: true, date: '' }, // 2 el.done = true
   { id: 3, value: 'Do a 100 pushups', done: false, date: '' },
 ];
 const initTodosUpdated = [
   { id: 1, value: 'Buy Eggs', done: false, date: '' },
   { id: 2, value: 'Go to Shopping', done: true, date: '' },
   { id: 3, value: 'Do a 100 pushups', done: false, date: '' },
-  { id: 4, value: 'kas ivesta i input', done: false, date: '' },
 ];
 
 function Todos(props) {
   const [newTodoValue, setNewTodoValue] = useState('');
 
   // main todo array for the app
-  const [todosArr, setTodosArr] = useState([]);
+  const [todosArr, setTodosArr] = useState(initTodos);
 
   function addNewTodoHandler() {
     // pagaminti nauja todo obj
@@ -59,6 +58,19 @@ function Todos(props) {
     if (e.keyCode === 13) addNewTodoHandler();
   }
 
+  function doneTodoHandler(idToBeDoneWith) {
+    console.log('make done el with id', idToBeDoneWith);
+    // veiksmu seka padaryti done
+
+    // 1. surasti ta el pagal id
+    setTodosArr((prevTodosArr) => {
+      //
+    });
+    // 2. pakeisti jo done i true
+    // 3. visa tai padaryti su state copija
+    // 4. atnaujinti state su pakeistu done elementu
+  }
+
   return (
     <div>
       <fieldset>
@@ -81,9 +93,10 @@ function Todos(props) {
             <h3>Todos</h3>
             <ol>
               {todosArr.map((tObj) => (
-                <li key={tObj.id}>
+                <li key={tObj.id} className={tObj.done ? 'doneTodo' : ''}>
                   {tObj.value}. created:
                   {tObj.date}
+                  <button onClick={() => doneTodoHandler(tObj.id)}>done</button>
                   <button onClick={() => deleteTodoHandler(tObj.id)}>X</button>
                 </li>
               ))}
