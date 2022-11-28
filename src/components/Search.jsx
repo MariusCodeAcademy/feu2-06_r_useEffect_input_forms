@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 function Search() {
   const [searchValue, setSearchValue] = useState('');
+  const [searchDone, setSearchDone] = useState(false);
 
   // padaryti kad veiktu isSearchValueEmpty
   const isSearchValueEmpty = searchValue === '' ? true : false;
@@ -17,9 +18,22 @@ function Search() {
     const enteredValue = event.target.value;
     // if (enteredValue === '') return;
     setSearchValue(enteredValue);
+    // paslepti sent message
+    // setSearchDone(false);
   }
 
-  console.log('searchValue ===', searchValue);
+  function searchHandler() {
+    // when user pressed search
+    const newSearchObj = { term: searchValue.trim() };
+    // siusti paieskos objekta, {term: <paieskosReiksme>}
+    console.log('newSearchObj ===', newSearchObj);
+    // isvalyti paieskos lauka
+    setSearchValue('');
+    // atvaizduoti ko ieskojom
+    setSearchDone(true);
+  }
+
+  // console.log('searchValue ===', searchValue);
 
   return (
     <fieldset>
@@ -31,10 +45,11 @@ function Search() {
         value={searchValue}
         type='search'
       />
-      <button>Search</button>
+      <button onClick={searchHandler}>Search</button>
       {/* rodyti priklausomai nuo isSearchValueEmpty */}
       {/* ideti ko buvo ieskoma i koieskojau */}
-      {!isSearchValueEmpty && <h3>You have entered for: {searchValue}</h3>}
+      {!isSearchValueEmpty && <h3>You have entered: {searchValue}</h3>}
+      {searchDone && isSearchValueEmpty && <h3>Your search was sent</h3>}
     </fieldset>
   );
 }
