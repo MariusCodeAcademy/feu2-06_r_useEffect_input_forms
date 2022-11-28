@@ -28,9 +28,22 @@ function Todos(props) {
     };
     // nekeisdamas orginalo atnaujinti todosArr su todosArr versija turinciam nauja todo
     // negalim keisti newTodoValue reiksmes tiesiogiai su push ar dar kazkuo
-    const newTodoValueCopyWithNewTodo = [...todosArr, newTodoObj];
+    // const newTodoArrCopyWithNewTodo = [...todosArr, newTodoObj];
+    const newTodoArrCopy = todosArr.slice();
+    newTodoArrCopy.push(newTodoObj);
 
-    setTodosArr((prevTodosArr) => newTodoValueCopyWithNewTodo);
+    setTodosArr(newTodoArrCopy);
+  }
+
+  function deleteTodoHandler(idToDelete) {
+    //
+    console.log('delete', idToDelete);
+    setTodosArr((prevTodoArr) => {
+      const todosAfterDelete = prevTodoArr.filter(
+        (tObj) => tObj.id != idToDelete
+      );
+      return todosAfterDelete;
+    });
   }
 
   return (
@@ -51,7 +64,10 @@ function Todos(props) {
         <h3>Todos</h3>
         <ol>
           {todosArr.map((tObj) => (
-            <li key={tObj.id}>{tObj.value}</li>
+            <li key={tObj.id}>
+              {tObj.value}{' '}
+              <button onClick={() => deleteTodoHandler(tObj.id)}>X</button>
+            </li>
           ))}
         </ol>
       </div>
