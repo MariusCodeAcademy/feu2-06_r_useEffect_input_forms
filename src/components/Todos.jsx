@@ -63,16 +63,16 @@ function Todos(props) {
     // veiksmu seka padaryti done
 
     setTodosArr((prevTodosArr) => {
+      // 3. visa tai padaryti su state copija
       const stateCopy = [...prevTodosArr];
       // 1. surasti ta el pagal id
       const foundTodo = stateCopy.find((tObj) => tObj.id === idToBeDoneWith);
       console.log('foundTodo ===', foundTodo);
-      foundTodo.done = true;
+      // 2. pakeisti jo done i true
+      foundTodo.done = !foundTodo.done;
+      // 4. atnaujinti state su pakeistu done elementu
       return stateCopy;
     });
-    // 2. pakeisti jo done i true
-    // 3. visa tai padaryti su state copija
-    // 4. atnaujinti state su pakeistu done elementu
   }
 
   return (
@@ -100,7 +100,9 @@ function Todos(props) {
                 <li key={tObj.id} className={tObj.done ? 'doneTodo' : ''}>
                   {tObj.value}. created:
                   {tObj.date}
-                  <button onClick={() => doneTodoHandler(tObj.id)}>done</button>
+                  <button onClick={() => doneTodoHandler(tObj.id)}>
+                    {tObj.done ? 'done' : 'undo'}
+                  </button>
                   <button onClick={() => deleteTodoHandler(tObj.id)}>X</button>
                 </li>
               ))}
