@@ -62,9 +62,13 @@ function Todos(props) {
     console.log('make done el with id', idToBeDoneWith);
     // veiksmu seka padaryti done
 
-    // 1. surasti ta el pagal id
     setTodosArr((prevTodosArr) => {
-      //
+      const stateCopy = [...prevTodosArr];
+      // 1. surasti ta el pagal id
+      const foundTodo = stateCopy.find((tObj) => tObj.id === idToBeDoneWith);
+      console.log('foundTodo ===', foundTodo);
+      foundTodo.done = true;
+      return stateCopy;
     });
     // 2. pakeisti jo done i true
     // 3. visa tai padaryti su state copija
