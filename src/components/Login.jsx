@@ -14,9 +14,27 @@ function Login(props) {
   // susikurti state email ir passwordui.
   // susieti su two way binding inputus su state
   // atvaizduoti htmle/jsx ivestas reiksmes
+
+  function loginHandler(event) {
+    // stabdyti puslapio perkrovima
+    event.preventDefault();
+    console.log('react con trolls the form');
+    // cia mes dirbam su state reiksmem  emailValue ir passwordValue
+    console.log({ emailValue, passwordValue });
+
+    // mini validation: jei neivesta kazkuri reikme tai klaida
+
+    if (emailValue === '' || passwordValue === '') {
+      console.warn('labai blogai nes kazkas neivesta !!!!!!!!!!');
+      return;
+    }
+
+    console.log('viskas gerai siunciam forma >>>>>> ');
+  }
+
   return (
     <div>
-      <form className='card'>
+      <form onSubmit={loginHandler} className='card'>
         <input
           onChange={emailInputHandler}
           value={emailValue}
