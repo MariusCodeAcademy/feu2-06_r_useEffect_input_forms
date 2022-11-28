@@ -8,7 +8,7 @@ function App() {
     <div className='App container'>
       <h1>React</h1>
       {/* <Search /> */}
-      {/* <Login /> */}
+      <Login />
       <Todos />
     </div>
   );

@@ -53,9 +53,15 @@ function Login(props) {
       .then((resp) => resp.json())
       .then((dataInJs) => {
         console.log('dataInJs ===', dataInJs);
-        // jei klaida tai setinam klaida
-        // jei sekme ta consolinam sekme ,
-        // jei sekme paslepti forma ir parodyti Sveikinimo kortele.
+        if (dataInJs.error) {
+          console.log('klaida');
+          // jei klaida tai setinam klaida
+        }
+        if (dataInJs.token) {
+          // jei sekme ta consolinam sekme ,
+          console.log('sekme');
+          // jei sekme paslepti forma ir parodyti Sveikinimo kortele.
+        }
       })
       .catch((err) => console.warn('login error', err));
   }
