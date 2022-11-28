@@ -37,6 +37,8 @@ function Login(props) {
     }
 
     console.log('viskas gerai siunciam forma >>>>>> ');
+
+    sendLoginReq({ email: emailValue, password: passwordValue });
   }
 
   const showError = errorValue !== '';
@@ -51,6 +53,9 @@ function Login(props) {
       .then((resp) => resp.json())
       .then((dataInJs) => {
         console.log('dataInJs ===', dataInJs);
+        // jei klaida tai setinam klaida
+        // jei sekme ta consolinam sekme ,
+        // jei sekme paslepti forma ir parodyti Sveikinimo kortele.
       })
       .catch((err) => console.warn('login error', err));
   }
