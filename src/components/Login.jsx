@@ -4,6 +4,9 @@ function Login(props) {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
 
+  // state for errors
+  const [errorValue, setErrorValue] = useState('');
+
   function emailInputHandler(e) {
     setEmailValue(e.target.value);
   }
@@ -18,6 +21,8 @@ function Login(props) {
   function loginHandler(event) {
     // stabdyti puslapio perkrovima
     event.preventDefault();
+    // clear all errors
+    setErrorValue('');
     console.log('react con trolls the form');
     // cia mes dirbam su state reiksmem  emailValue ir passwordValue
     console.log({ emailValue, passwordValue });
@@ -26,15 +31,21 @@ function Login(props) {
 
     if (emailValue === '' || passwordValue === '') {
       console.warn('labai blogai nes kazkas neivesta !!!!!!!!!!');
+      // setError
+      setErrorValue('Prasome uzpildyti visus laukus');
       return;
     }
 
     console.log('viskas gerai siunciam forma >>>>>> ');
   }
 
+  const showError = errorValue !== '';
+
   return (
     <div>
       <form onSubmit={loginHandler} className='card'>
+        {showError && <h3 className='errorAlert'>{errorValue}</h3>}
+
         <input
           onChange={emailInputHandler}
           value={emailValue}
