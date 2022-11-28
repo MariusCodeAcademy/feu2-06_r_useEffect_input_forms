@@ -41,6 +41,20 @@ function Login(props) {
 
   const showError = errorValue !== '';
 
+  function sendLoginReq(loginObj) {
+    const url = 'https://reqres.in/api/login';
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(loginObj),
+    })
+      .then((resp) => resp.json())
+      .then((dataInJs) => {
+        console.log('dataInJs ===', dataInJs);
+      })
+      .catch((err) => console.warn('login error', err));
+  }
+
   return (
     <div>
       <form onSubmit={loginHandler} className='card'>
