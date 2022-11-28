@@ -48,12 +48,24 @@ function Todos(props) {
     });
   }
 
+  // infered value
+  const noTodosYet = !todosArr.length;
+
+  function handleKey(e) {
+    // console.log('e.code ===', e.code);
+    // console.log('e.keyCode ===', e.keyCode);
+    // jei keyCode === 13 tai paspaustas enter klavisas
+    // iskviesti addNewTodoHandler
+    if (e.keyCode === 13) addNewTodoHandler();
+  }
+
   return (
     <div>
       <fieldset>
         <legend>Add todo</legend>
         <input
           onChange={(e) => setNewTodoValue(e.target.value)}
+          onKeyUp={handleKey}
           value={newTodoValue}
           type='text'
           placeholder='What to do?'
@@ -63,16 +75,21 @@ function Todos(props) {
       </fieldset>
 
       <div className='card'>
-        <h3>Todos</h3>
-        <ol>
-          {todosArr.map((tObj) => (
-            <li key={tObj.id}>
-              {tObj.value}. created:
-              {tObj.date}
-              <button onClick={() => deleteTodoHandler(tObj.id)}>X</button>
-            </li>
-          ))}
-        </ol>
+        {noTodosYet && <h3>No todos yet, add some.</h3>}
+        {!noTodosYet && (
+          <>
+            <h3>Todos</h3>
+            <ol>
+              {todosArr.map((tObj) => (
+                <li key={tObj.id}>
+                  {tObj.value}. created:
+                  {tObj.date}
+                  <button onClick={() => deleteTodoHandler(tObj.id)}>X</button>
+                </li>
+              ))}
+            </ol>
+          </>
+        )}
       </div>
     </div>
   );
