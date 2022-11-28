@@ -16,7 +16,7 @@ function Todos(props) {
   const [newTodoValue, setNewTodoValue] = useState('');
 
   // main todo array for the app
-  const [todosArr, setTodosArr] = useState(initTodos);
+  const [todosArr, setTodosArr] = useState([]);
 
   function addNewTodoHandler() {
     // pagaminti nauja todo obj
@@ -24,7 +24,7 @@ function Todos(props) {
       id: Math.random().toString().slice(2),
       value: newTodoValue,
       done: false,
-      date: new Date(),
+      date: new Date().toLocaleTimeString(),
     };
     // nekeisdamas orginalo atnaujinti todosArr su todosArr versija turinciam nauja todo
     // negalim keisti newTodoValue reiksmes tiesiogiai su push ar dar kazkuo
@@ -33,6 +33,8 @@ function Todos(props) {
     newTodoArrCopy.push(newTodoObj);
 
     setTodosArr(newTodoArrCopy);
+    // clear out input
+    setNewTodoValue('');
   }
 
   function deleteTodoHandler(idToDelete) {
@@ -65,7 +67,8 @@ function Todos(props) {
         <ol>
           {todosArr.map((tObj) => (
             <li key={tObj.id}>
-              {tObj.value}{' '}
+              {tObj.value}. created:
+              {tObj.date}
               <button onClick={() => deleteTodoHandler(tObj.id)}>X</button>
             </li>
           ))}
