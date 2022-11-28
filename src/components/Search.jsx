@@ -4,7 +4,11 @@ function Search() {
   const [searchValue, setSearchValue] = useState('');
 
   // padaryti kad veiktu isSearchValueEmpty
-  const isSearchValueEmpty = true;
+  const isSearchValueEmpty = searchValue === '' ? true : false;
+  // kiti varijantai tam paciam tikslui
+  // const isSearchValueEmpty = searchValue.length === 0 ? true : false;
+  // const isSearchValueEmpty = searchValue.length ? false : true;
+  // const isSearchValueEmpty = !searchValue.length;
 
   function inputHandler(event) {
     // console.log('event ===', event);
@@ -30,7 +34,7 @@ function Search() {
       <button>Search</button>
       {/* rodyti priklausomai nuo isSearchValueEmpty */}
       {/* ideti ko buvo ieskoma i koieskojau */}
-      <h3>You have searched for: koieskojau</h3>
+      {!isSearchValueEmpty && <h3>You have entered for: {searchValue}</h3>}
     </fieldset>
   );
 }
