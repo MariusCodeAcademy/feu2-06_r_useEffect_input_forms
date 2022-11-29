@@ -17,6 +17,10 @@ function Todos(props) {
   // main todo array for the app
   const [todosArr, setTodosArr] = useState(initTodos);
 
+  const totalTodos = todosArr.length;
+
+  const doneTodos = todosArr.filter((tObj) => tObj.done === true).length;
+
   function addNewTodoHandler() {
     // pagaminti nauja todo obj
     const newTodoObj = {
@@ -91,6 +95,10 @@ function Todos(props) {
       </fieldset>
 
       <div className='card'>
+        <h3>
+          Total/done <br />
+          {totalTodos} / {doneTodos}
+        </h3>
         {noTodosYet && <h3>No todos yet, add some.</h3>}
         {!noTodosYet && (
           <>
@@ -101,7 +109,7 @@ function Todos(props) {
                   {tObj.value}. created:
                   {tObj.date}
                   <button onClick={() => doneTodoHandler(tObj.id)}>
-                    {tObj.done ? 'done' : 'undo'}
+                    {tObj.done ? 'undo' : 'done'}
                   </button>
                   <button onClick={() => deleteTodoHandler(tObj.id)}>X</button>
                 </li>
